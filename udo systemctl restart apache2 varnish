@@ -1,0 +1,8 @@
+● nginx.service - Startup script for nginx service
+     Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+    Drop-In: /usr/lib/systemd/system/nginx.service.d
+             └─respawn.conf
+     Active: activating (auto-restart) (Result: exit-code) since Fri 2023-01-06 11:47:20 GMT; 4s ago
+    Process: 2951693 ExecStartPre=/bin/sh -c [ '${NGINX_ENABLED}' = 'yes' ] || { echo Not starting nginx as it is disabled in Plesk. Run \'plesk sbin nginxmng -e\' to enable nginx in Plesk.; exit 1; } (code=exited, status=0/SUCCESS)
+    Process: 2951702 ExecStartPre=/usr/sbin/nginx -t (code=exited, status=0/SUCCESS)
+    Process: 2951705 ExecStart=/usr/sbin/nginx [0;1;31m(code=exited, status=1/FAILURE)[0m

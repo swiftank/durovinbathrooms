@@ -1,0 +1,12 @@
+**/app/*
+**/dev/*
+**/generated/*
+**/Images/*
+**/lib/*
+**/media/*
+**/phpserver/*
+**/pub/*
+**/setup/*
+**/var/*
+**/vendor/*
+**/bin/*
