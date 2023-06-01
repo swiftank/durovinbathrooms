@@ -1,0 +1,36 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Product view template
+ *
+ * @see \Magento\Catalog\Block\Product\View
+ */
+?>
+<?php
+$_product = $this->getProduct();
+?>
+
+<div itemscope itemtype="http://schema.org/Product">
+    <meta itemprop="name" content="<?php /* @escapeNotVerified */ echo $block->escapeQuote($block->stripTags($_product->getName())); ?>" />
+    <meta itemprop="image" content="<?php /* @escapeNotVerified */ echo $block->stripTags($block->getImage($_product, 'product_base_image')->getImageUrl()); ?>" />
+    <meta itemprop="description" content="<?php /* @escapeNotVerified */ echo $block->stripTags($_product->getDescription()); ?>" />
+    <meta itemprop="url" content="<?php /* @escapeNotVerified */ echo $block->stripTags($_product->getProductUrl()); ?>" />
+    <meta itemprop="sku" content="<?php /* @escapeNotVerified */ echo $block->stripTags($_product->getSku()); ?>" />
+	<meta itemprop="brand" content="Durovin" />
+
+    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+        <meta itemprop="priceCurrency" content="GBP" />
+        <meta itemprop="price" content="<?php echo $_product->getFinalPrice(); ?>" />
+        <?php if ($_product->isAvailable()): ?>
+            <link itemprop="availability" href="http://schema.org/InStock" />
+        <?php else : ?>
+            <link  itemprop="availability" href="http://schema.org/OutOfStock" />
+        <?php endif ?>
+    </div>
+</div>

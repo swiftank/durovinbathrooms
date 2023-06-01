@@ -1,0 +1,131 @@
+/* Search bar font styles   */
+
+#minisearch-input-top-search {
+    font: 500 13px/1.35 Poppins, Helvetica Neue, Verdana, Arial, sans-serif;
+}
+
+
+/* Create Account Page New Passsword Label  Styles  */
+
+.custom_text_lower_case {
+    text-transform: capitalize !important;
+}
+
+.osc .fieldset.address .field.inline {
+    width: 100% !important;
+}
+
+#checkout .search-container input {
+    width: 50% !important;
+}
+
+.search-container.type_3 .action {
+    position: relative;
+    top: -10px;
+}
+
+#checkout .shipping-policy-block.field-tooltip .field-tooltip-action {
+    color: #fff;
+    margin-right: 10px;
+}
+
+#checkout .crafty_address_field.crafty_address_field_hidden {
+    display: block;
+}
+
+#checkout #m2_0_cp_manual_entry, #checkout #m2_2_cp_manual_entry{
+    display: none !important;
+}
+
+#checkout .billing-address-same-as-shipping-block{
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#checkout .stripe-payments-elements{
+    margin-top: 40px;
+}
+#checkout .checkout-payment-method .payment-method-billing-address .primary .action-update{
+    color: #ffffff;
+    background-color: #282828;
+    border-color: #282828
+}
+#checkout .checkout-payment-method .payment-method-billing-address .primary .action-update:hover{
+    background: #ffffff;
+    border: 1px solid #282828;
+    color: #282828;
+}
+.custom_viewcart_btn_block .action.viewcart{
+    display: block;
+    width: 100%;
+    background: #282828;
+    border: 1px solid #282828;
+    color: #ffffff !important;
+    line-height: 2.2rem;
+    padding: 14px 17px;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+}
+
+.custom_viewcart_btn_block .action.viewcart:hover{
+    background: #ffffff;
+    border: 1px solid #282828;
+    color: #282828 !important;
+}
+
+.custom_viewcart_btn_block .secondary{
+    margin: 0 10px 15px;
+}
+
+.showmoretext {
+    height: 80px;
+    overflow: hidden
+}
+
+.showmorecontainer {
+    position: relative
+}
+
+.showmorecontainer label {
+    position: absolute;
+    top: 100%
+}
+
+.showmorecontainer input {
+    display: none
+}
+
+.showmorecontainer label:after {
+    content: "--Show More--";
+    color: blue
+}
+
+.showmorecontainer input:checked+label:after {
+    content: "--Show Less--";
+    color: blue
+}
+
+.showmorecontainer input:checked~div {
+    height: 100%
+}
+
+.showmorecontainer a:link {
+    color: blue;
+    text-decoration: underline
+}
+
+.showmorecontainer a:hover {
+    color: red;
+    background-color: transparent;
+    text-decoration: underline
+}
+
+.showmorecontainer h1 {
+    font: 500 20px/1.35 PT Sans,Helvetica Neue,Verdana,Arial,sans-serif;
+    margin: 0 0 20px
+}
+
+
+.textcolour.level-top a span{
+ color:red;
+}

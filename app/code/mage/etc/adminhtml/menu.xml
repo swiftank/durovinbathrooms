@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://magezon.com/license/.
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  Magezon
+ * @package   Magezon_TabsPro
+ * @copyright Copyright (C) 2018 Magezon (https://magezon.com)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magezon_TabsPro::tab" title="Tabs Pro" translate="title" module="Magezon_TabsPro" sortOrder="0" parent="Magezon_Core::extensions" resource="Magezon_TabsPro::tab"/>
+        <add id="Magezon_TabsPro::tab_add" title="Add New Tab Profile" translate="title" module="Magezon_TabsPro" sortOrder="0" parent="Magezon_TabsPro::tab" action="tabspro/tab/new" resource="Magezon_TabsPro::tab_save"/>
+        <add id="Magezon_TabsPro::tabs_manage" title="Manage Tab Profiles" translate="title" module="Magezon_TabsPro" sortOrder="10" parent="Magezon_TabsPro::tab" action="tabspro/tab" resource="Magezon_TabsPro::tab"/>
+        <add id="Magezon_TabsPro::settings" title="Settings" translate="title" module="Magezon_TabsPro" sortOrder="1000" parent="Magezon_TabsPro::tab" action="adminhtml/system_config/edit/section/tabspro" resource="Magezon_TabsPro::settings"/>
+    </menu>
+</config>

@@ -1,0 +1,173 @@
+<?php /** @var $block \Magezon\TabsPro\Block\Tab */ ?>
+<?php
+use Magento\Framework\App\Action\Action;
+$coreHelper           = $this->helper('\Magezon\Core\Helper\Data');
+$items                = $block->getItems();
+$count                = count($items);
+$type                 = 'widget-product-grid';
+$mode                 = 'grid';
+$image                = 'new_products_content_widget_grid';
+$title                = $block->getTitle() ? __($block->getTitle()) : '';
+$showName             = $block->getData('product_name');
+$showImage            = $block->getData('product_image');
+$imageWidth           = (int) $block->getData('product_image_width');
+$imageHeight          = (int) $block->getData('product_image_height');
+$showPrice            = $block->getData('product_price');
+$showShortDescription = $block->getData('product_shortdescription');
+$showReview           = $block->getData('product_review');
+$showWishlist         = $block->getData('product_wishlist');
+$showCompare          = $block->getData('product_compare');
+$showCart             = $block->getData('product_addtocart');
+$templateType         = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+$data                 = $block->getData();
+unset($data['items']);
+
+$colection = [];
+$column = 5;
+$items_per_column = 1;
+if ((int)$data['items_per_column']) {
+	$items_per_column = $data['items_per_column'];
+}
+if($count%$items_per_column == 0){
+	$column = $count/$items_per_column;
+}else{
+	$column = floor($count/$items_per_column)+1;
+}
+$i = $x = 0;
+foreach ($items as $item) {
+	if($i<$column){
+		$i++;
+	}else{
+		$i = 1;
+		$x++;
+	}
+	$colection[$i][$x] = $item;
+}
+?>
+<?php if ($count) { ?>
+<ul class="owl-carousel product-items tabspro-items" 
+	data-device-0="<?php echo $data['owl_device_0'] ?>"
+	data-device-480="<?php echo $data['owl_device_480'] ?>"
+	data-device-768="<?php echo $data['owl_device_768'] ?>"
+	data-device-960="<?php echo $data['owl_device_960'] ?>"
+	data-device-1024="<?php echo $data['owl_device_1024'] ?>"
+	data-autoplay="<?php echo $data['owl_autoplay']?'true':'false' ?>"
+	data-nav="<?php echo $data['owl_nav']?'true':'false' ?>"
+	data-autoplay-hover-pause="<?php echo $data['owl_autoplay_hover_pause']?'true':'false' ?>"
+	data-dots="<?php echo $data['owl_dots']?'true':'false' ?>"
+	data-autoplay-timeout="<?php echo $data['owl_autoplay_timeout'] ?>"
+	data-lazyload="<?php echo $data['owl_lazyload']?'true':'false' ?>"
+	data-loop="<?php echo $data['owl_loop']?'true':'false' ?>"
+	data-rtl="<?php echo $data['owl_rtl']?'true':'false' ?>"
+	data-margin="<?php echo $data['owl_margin'] ?>"
+	data-mousedrag="<?php echo $data['owl_mousedrag']?'true':'false' ?>"
+	data-touchdrag="<?php echo $data['owl_touchdrag']?'true':'false' ?>"
+	data-pulldrag="<?php echo $data['owl_pulldrag']?'true':'false' ?>"
+	data-parent-id="<?php echo $data['tab_id'] ?>"
+>
+<?php $iterator = 1; ?>
+
+
+<?php foreach ($colection as $_items): ?>
+	<li class="product-item <?php if (count($_items)>1) { echo 'multirow'; } ?>">
+		<?php foreach ($_items as $_item): ?>
+			<div class="product-item-info">
+				<?php if ($showImage) { ?>
+				<a href="<?php /* @escapeNotVerified */ echo $block->getProductUrl($_item) ?>" class="product-item-photo">
+					<?php
+					$imageParams = [];
+					if ($data['owl_lazyload']) {
+						$imageParams['data-lazyload'] = 1;
+					}
+					?>
+					<?php echo $block->getTabProductImage($data['owl_lazyload'], $_item, $image, $imageParams, $imageWidth, $imageHeight)->toHtml(); ?>
+				</a>
+				<?php } ?>
+				<div class="product details product-item-details">
+					<?php if ($showName): ?>
+						<strong class="product-item-name">
+							<a title="<?php echo $block->escapeHtml($_item->getName()) ?>"
+								href="<?php /* @escapeNotVerified */ echo $block->getProductUrl($_item) ?>"
+								class="product-item-link">
+								<?php echo $block->escapeHtml($_item->getName()) ?>
+							</a>
+						</strong>
+					<?php endif; ?>
+					<?php
+					if ($showPrice):
+						echo $block->getProductPriceHtml($_item, $type);
+					endif;
+					?>
+
+					<?php
+					if (isset($data['product_swatches']) && $data['product_swatches']):
+						echo $block->getSwatchHtml($_item, $data['tab_id']);
+					endif;
+					?>
+
+					<?php if ($templateType && $showReview): ?>
+						<?php echo $block->getReviewsSummaryHtml($_item, $templateType) ?>
+					<?php endif; ?>
+
+					<?php if ($showShortDescription) { ?>
+					<p class="product-item-shortdescription"><?php echo $coreHelper->filter($_item->getShortDescription()) ?></p>
+					<?php } ?>
+
+					<?php if ($showWishlist || $showCompare || $showCart): ?>
+						<div class="product-item-actions">
+							<?php if ($showCart): ?>
+								<div class="actions-primary">
+									<?php if ($_item->isSaleable()): ?>
+										<?php $postParams = $block->getAddToCartPostParams($_item); ?>
+										<form data-role="tocart-form" action="<?php /* @escapeNotVerified */ echo $postParams['action']; ?>" method="post">
+											<input type="hidden" name="product" value="<?php /* @escapeNotVerified */ echo $postParams['data']['product']; ?>">
+											<input type="hidden" name="<?php /* @escapeNotVerified */ echo Action::PARAM_NAME_URL_ENCODED; ?>" value="<?php /* @escapeNotVerified */ echo $postParams['data'][Action::PARAM_NAME_URL_ENCODED]; ?>">
+											<?php if ($formKey = $block->getProductFormKey()) { ?>
+											<input name="form_key" type="hidden" value="<?php echo $formKey ?>" />
+											<?php } else { ?>
+											<?php echo $block->getBlockHtml('formkey')?>
+											<?php } ?>
+											<button type="submit"
+											title="<?php echo $block->escapeHtml(__('Add to Cart')); ?>"
+											class="action tocart primary">
+											<span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+										</button>
+									</form>
+								<?php else: ?>
+									<?php if ($_item->getIsSalable()): ?>
+										<div class="stock available"><span><?php /* @escapeNotVerified */ echo __('In stock') ?></span></div>
+									<?php else: ?>
+										<div class="stock unavailable"><span><?php /* @escapeNotVerified */ echo __('Out of stock') ?></span></div>
+									<?php endif; ?>
+								<?php endif; ?>
+							</div>
+						<?php endif; ?>
+						<?php if ($showWishlist || $showCompare): ?>
+							<div class="actions-secondary" data-role="add-to-links">
+								<?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow() && $showWishlist): ?>
+									<a href="#"
+									data-post='<?php /* @escapeNotVerified */ echo $block->getAddToWishlistParams($_item); ?>'
+									class="action towishlist" data-action="add-to-wishlist"
+									title="<?php /* @escapeNotVerified */ echo __('Add to Wish List') ?>">
+									<span><?php /* @escapeNotVerified */ echo __('Add to Wish List') ?></span>
+								</a>
+							<?php endif; ?>
+							<?php if ($block->getAddToCompareUrl() && $showCompare): ?>
+								<?php $compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');?>
+								<a href="#" class="action tocompare"
+								data-post='<?php /* @escapeNotVerified */ echo $compareHelper->getPostDataParams($_item);?>'
+								title="<?php /* @escapeNotVerified */ echo __('Add to Compare') ?>">
+								<span><?php /* @escapeNotVerified */ echo __('Add to Compare') ?></span>
+							</a>
+						<?php endif; ?>
+					</div>
+				<?php endif; ?>
+			</div>
+		<?php endif; ?>
+	</div>
+</div>
+<?php endforeach ?>
+</li>
+<?php endforeach ?>
+</ul>
+<?php } ?>

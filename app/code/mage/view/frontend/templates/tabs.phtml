@@ -1,0 +1,67 @@
+<?php /** @var $block \Magezon\TabsPro\Block\Widget\Tabs */ ?>
+<?php
+$tab      = $block->getTab();
+$tabs     = (array) $tab->getTabs();
+$widgetId = "tabspro-block-" . $tab->getId()  . time() . uniqid();
+
+$default = 0;
+$x = 0;
+foreach ($tabs as $_tab) {
+	if (isset($_tab['is_default']) && $_tab['is_default']=='on') {
+		$default = $x;
+		break;
+	}
+	$x++;
+}
+?>
+
+<?php if ($tab && !empty($tabs)) { ?>
+<div id="<?php echo $widgetId ?>" class="block widget tabspro-block <?php echo $tab->getCustomClass() ?>">
+	<div class="block-content">
+		<div class="tabspro-tabs tab-grid-wrapper">
+
+			<div class="tabspro-tabs-nav">
+				<?php $i = 0; ?>
+				<?php foreach ($tabs as $tabBlockId => $_tab) { ?>
+				<?php $id = time(); ?>
+				<div class="data item title" data-ajax=true" aria-labeledby="tab-label-<?php /* @escapeNotVerified */ echo $id; ?>-title" data-role="collapsible" id="tab-label-<?php /* @escapeNotVerified */ echo $id; ?>">
+					<a class="data switch" tabindex="-1" data-toggle="switch" href="#<?php echo $tabBlockId ?>" id="tab-label-<?php /* @escapeNotVerified */ echo $id; ?>-title" <?php if (isset($_tab['ajax']) && $_tab['ajax'] == 'on') { ?>data-tab-ajax="true" data-ajax-url="<?php echo $block->getUrl('tabspro/ajax/tab', ['_secure' => 'true']) ?>" data-tab-id="<?php echo $tab->getId() ?>" data-block-id="<?php echo $tabBlockId ?>"<?php } ?>>
+						<?php echo $block->escapeHtml(__($_tab['title'])) ?>
+					</a>
+				</div>
+				<?php $i++; ?>
+				<?php } ?>
+			</div>
+			<div class="tabspro-tabs-content">
+				<?php $i = 0; ?>
+				<?php foreach ($tabs as $tabBlockId => $_tab) { ?>
+				<?php $id = time(); ?>
+				<div class="data item content <?php if (isset($_tab['ajax']) && $_tab['ajax'] == 'on') { echo 'ajaxloading'; } ?>" <?php if($i!=$default) { ?>style="display: none"<?php } ?> id="<?php echo $tabBlockId ?>" data-role="content">
+					<?php if (!isset($_tab['ajax']) || $_tab['ajax'] == 'off') { ?>
+					<?php echo $block->getTabHtml($tabBlockId, $tab, $widgetId); ?>
+					<?php } else { ?>
+					<div class="tabspro-ajax-loading">
+						<div class="tabspro-fade-loading">
+							<i></i>
+							<i></i>
+							<i></i>
+							<i></i>
+						</div>
+					</div>
+					<?php } ?>
+				</div>
+				<?php $i++; ?>
+				<?php } ?>
+			</div>
+		</div>
+	</div>
+</div>
+<?php } ?>
+<script>
+require(['jquery', 'tabspro'], function($) {
+	$('#<?php echo $widgetId ?>').tabs({
+		"openedState": "active",
+		"active": <?php echo $default ?>
+	});
+});
+</script>

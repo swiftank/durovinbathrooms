@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+ * @package     Plumrocket_Amp
+ * @modified	modified from amp_reviews 
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		<!--related posts tab X.LI-->
+		<referenceContainer name="content">	
+			<referenceBlock name="product.info.details">
+				<block class="Magefan\Blog\Block\Catalog\Product\RelatedPosts" name="blog.relatedposts.tab" as="blog.relatedposts" template="Plumrocket_AmpCatalog::relatedposts.phtml" group="detailed_info">
+					<arguments>
+						<argument translate="true" name="title" xsi:type="string">Related Posts</argument>
+						<argument name="sort_order" xsi:type="string">40</argument>
+					</arguments>
+				</block>
+			</referenceBlock>
+			
+			<referenceBlock name="product.info.details">
+				<block class="SY\Attachments\Block\Product\View\Attachments" name="product.attachments" template="Plumrocket_AmpCatalog::attachments.phtml" group="detailed_info" ifconfig="sy_attachments/general/active" >
+				<arguments>
+					<argument translate="true" name="title" xsi:type="string">Instructions</argument>
+					<argument name="sort_order" xsi:type="string">50</argument>
+				</arguments>
+				</block>
+			</referenceBlock>
+			
+			<referenceBlock name="product.info.details">
+				<block class="Magento\Catalog\Block\Product\View" name="delivery.tab" template="Plumrocket_AmpCatalog::delivery_return.phtml" group="detailed_info">
+					<arguments>
+						<argument translate="true" name="title" xsi:type="string">Delivery &amp; Return</argument>
+						<argument name="sort_order" xsi:type="string">56</argument>
+					</arguments>
+				</block>
+			</referenceBlock>
+	
+		</referenceContainer>
+    </body>
+</page>

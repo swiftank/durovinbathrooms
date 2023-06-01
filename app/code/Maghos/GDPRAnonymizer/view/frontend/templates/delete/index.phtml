@@ -1,0 +1,41 @@
+<?php
+/**
+ *
+ * Maghos_Gdpr Magento 2 extension
+ *
+ * NOTICE OF LICENSE
+ *
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ *
+ * @category Maghos
+ * @package Maghos_Gdpr
+ * @copyright Copyright (c) 2018 Maghos s.r.o.
+ * @license http://www.maghos.com/business-license
+ * @author Magento dev team <support@maghos.com>
+ */
+/** @var $block \Magento\Framework\View\Element\Template */
+?>
+<form class="form" action="<?= /* @noEscape */ $block->getUrl('gdpr/delete/requestEmail') ?>"
+      method="POST"
+      data-hasrequired="<?= __('* Required Fields') ?>"
+      data-mage-init='{"validation":{}}'
+>
+    <fieldset class="fieldset">
+        <div class="field email required">
+            <label class="label" for="email"><span><?= __('Email') ?></span></label>
+            <div class="control">
+                <input id="email" name="email" type="text" class="input-text"
+                       data-validate="{required:true, 'validate-email':true}"/>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button class="action submit primary" type="submit" title="<?= __('Request deletion') ?>">
+                <span><?= __('Request deletion') ?></span>
+            </button>
+        </div>
+    </div>
+</form>

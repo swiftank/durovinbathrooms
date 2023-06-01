@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+		 <font src="fonts/opensans/light/opensans-300.woff2"/>
+		 <font src="css/fonts/fontawesome-webfont.woff2"/>
+		 <css src="css/fontawesome/font-awesome.min.css"/>
+         <font src="fonts/opensans/bold/opensans-700.woff2"/>
+         <font src="fonts/opensans/semibold/opensans-600.woff2"/> 
+		 <font src="fonts/opensans/regular/opensans-400.woff2"/>
+		 <font src="fonts/Luma-Icons.woff2"/>
+		 <css src="css/fontpeicon/pe-icon-7-stroke.min.css"/>
+
+     </head>
+</page>

@@ -1,0 +1,531 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <!-- Add new Tab -->
+        <tab id="magearray" translate="label" sortOrder="100">
+            <label>
+                MageArray - News
+            </label>
+        </tab>
+        <section id="magearray_news" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <label>News</label>
+            <tab>magearray</tab>
+            <!-- resource tag name which we have to defined in the acl.xml -->
+            <resource>MageArray_News::config_news</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>General Options</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="list_url" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>News list url</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="url_prefix" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>News url prefix</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="url_suffix" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>News url suffix</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="cat_prefix" type="text" sortOrder="71" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cateogry url prefix</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="top_menu_link" type="select" sortOrder="71" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Add Links into Top Menu</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="footer_link" type="select" sortOrder="71" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Add Links into Footer Links</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+
+                <field id="top_menu_title" type="text" sortOrder="72" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Top Menu/Footer Link Title</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+				<field id="show_sitemap" translate="label comment" type="select" sortOrder="78" showInDefault="20"
+                       showInWebsite="1" showInStore="1">
+                    <label>Show Sitemap</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="breadcrumb" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Show Breadcrumb</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="postonlist" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Post per Page on List</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="post_sorting" translate="label" type="select" sortOrder="5" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Post List Shorting</label>
+                    <source_model>MageArray\News\Model\Config\Source\Sorting</source_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="date_format" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Date Format</label>
+                    <comment>d-m-Y, Y-m-d, m-d-Y</comment>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="post_layout" translate="label" type="select" sortOrder="7" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Post View Page Layout</label>
+                    <source_model>MageArray\News\Model\Config\Source\Pagelayout</source_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="post_list_layout" translate="label" type="select" sortOrder="8" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Post List Page Layout</label>
+                    <source_model>MageArray\News\Model\Config\Source\Pagelayout</source_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="cat_layout" translate="label" type="select" sortOrder="9" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Category List Page Layout</label>
+                    <source_model>MageArray\News\Model\Config\Source\Pagelayout</source_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="infinite_scroll" translate="label" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enable Infinite Scroll?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+
+            </group>
+
+            <group id="comments" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Comments Options</label>
+                <field id="type_of_comment" translate="label" type="select" sortOrder="1" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Comments</label>
+                    <source_model>MageArray\News\Model\Config\Source\CommentType</source_model>
+                </field>
+
+                <field id="no_of_comments" translate="label comment" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Number of Comments</label>
+                    <depends>
+                        <field id="type_of_comment">facebook</field>
+                    </depends>
+                </field>
+
+                <field id="fb_app_id" translate="label comment" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Facebook App ID</label>
+                    <depends>
+                        <field id="type_of_comment">facebook</field>
+                    </depends>
+                    <comment><![CDATA[
+						<a href="https://help.yahoo.com/kb/SLN18861.html" target="_blank">How do I get a Facebook Application ID?</a>
+					]]></comment>
+                </field>
+
+                <field id="disqus_shortname" translate="label comment" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Your Disqus Forum Shortname</label>
+                    <depends>
+                        <field id="type_of_comment">disqus</field>
+                    </depends>
+                    <comment><![CDATA[
+						<a href="https://help.disqus.com/customer/portal/articles/466208" target="_blank">What's a shortname?</a>
+					]]></comment>
+                </field>
+                <field id="login_require" translate="label" type="select" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Login Require to Comments?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="type_of_comment">default</field>
+                    </depends>
+                </field>
+                <field id="autoapprove" translate="label" type="select" sortOrder="3" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Auto Approve Comments</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="type_of_comment">default</field>
+                        <field id="login_require">0</field>
+                    </depends>
+                </field>
+                <field id="loginapprove" translate="label" type="select" sortOrder="3" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Logged in Auto Approve</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="type_of_comment">default</field>
+                    </depends>
+                </field>
+                <field id="emailoncomment" translate="label" type="select" sortOrder="4" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email on Comment Post</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="type_of_comment">default</field>
+                    </depends>
+                </field>
+                <field id="email_template" translate="label" type="select" sortOrder="5" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="type_of_comment">default</field>
+                    </depends>
+                </field>
+                <field id="admin_email" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Admin Email ID</label>
+                    <depends>
+                        <field id="type_of_comment">default</field>
+                    </depends>
+                </field>
+                <field id="use_captcha" translate="label" type="select" sortOrder="6" showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Use Google Captcha for Comment?</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="type_of_comment">default</field>
+                    </depends>
+                </field>
+                <field id="google_site_key" translate="label" type="text" sortOrder="7" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Google Site Key</label>
+                    <depends>
+                        <field separator="," id="type_of_comment">default,google</field>
+                    </depends>
+                    <comment><![CDATA[
+                            <a href="https://www.google.com/recaptcha/intro/index.html" target="_blank">
+                                SignUp for Google ReCapcha
+                            </a>
+                        ]]></comment>
+                </field>
+                <field id="google_secret_key" translate="label" type="text" sortOrder="8" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Google Secret Key</label>
+                    <depends>
+                        <field separator="," id="type_of_comment">default,google</field>
+                    </depends>
+                </field>
+                <field id="commentcount" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Comments Per Page</label>
+                    <depends>
+                        <field id="type_of_comment">default</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="related_setting" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Related Settings</label>
+
+                <group id="related_posts" translate="label" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Related Posts</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Display Related Posts</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+
+                    <field id="number_of_posts" translate="label comment" type="text" sortOrder="20" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Number of Posts</label>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                </group>
+
+                <group id="related_products" translate="label" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Related Products</label>
+                    <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Display Related Products</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="number_of_products" translate="label comment" type="text" sortOrder="20"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Number of Products</label>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="show_addtocart" translate="label comment" type="select" sortOrder="30" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Show Add to Cart</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="show_whishlist_icon" translate="label comment" type="select" sortOrder="40"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Show Whishlist Icon</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="show_compare_icon" translate="label comment" type="select" sortOrder="50"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Show Compare Icon</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+
+                </group>
+            </group>
+
+            <group id="display_settings" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Display Options</label>
+                <field id="display_views" translate="label" type="select" sortOrder="1" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Display Views</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_tags" translate="label" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Display Tags on Post</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_share" translate="label" type="select" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Display Share Buttons</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="share_above" translate="label" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Share Buttons Above Post Content</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="display_share">1</field>
+                    </depends>
+                </field>
+                <field id="share_below" translate="label" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Share Buttons Below Post Content</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="display_share">1</field>
+                    </depends>
+                </field>
+
+                <group id="list_page" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>News Post List Page</label>
+                    <field id="show_type" translate="label" type="select" sortOrder="6" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Show news as</label>
+                        <source_model>MageArray\News\Model\Config\Source\Listtype</source_model>
+                        <depends>
+                            <field id="display_category">1</field>
+                        </depends>
+                    </field>
+                    <field id="category_onlist_left" translate="label" type="select" sortOrder="7" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Category Tree on Left Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="category_onlist_right" translate="label" type="select" sortOrder="8" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Category on Right Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="popular_onlist_left" translate="label" type="select" sortOrder="9" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Popular Posts Widget on Left Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="popular_onlist_right" translate="label" type="select" sortOrder="10" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Popular Posts widget Right Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="latest_onlist_left" translate="label" type="select" sortOrder="11" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Latest Posts Widget on Left Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="latest_onlist_right" translate="label" type="select" sortOrder="12" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Latest Posts Widget on Right Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="archive_onlist_left" translate="label" type="select" sortOrder="13" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Archive Posts Widget on Left Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="archive_onlist_right" translate="label" type="select" sortOrder="14" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Archive Widget on Right Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
+                <group id="view_page" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>News Post View Page</label>
+                    <field id="category_onpost_left" translate="label" type="select" sortOrder="13" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Category Tree on Left Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="category_onpost_right" translate="label" type="select" sortOrder="14" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Category Tree on Right Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="popular_onpost_left" translate="label" type="select" sortOrder="15" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Popular Posts Widget on Left Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="popular_onpost_right" translate="label" type="select" sortOrder="16" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Popular Posts Widget on Right Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="latest_onpost_left" translate="label" type="select" sortOrder="17" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Latest Posts Widget on Left Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="latest_onpost_right" translate="label" type="select" sortOrder="18" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Latest Posts Widget on Right Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="archive_onpost_left" translate="label" type="select" sortOrder="19" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Archive Widget on Left Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="archive_onpost_right" translate="label" type="select" sortOrder="20" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Archive Widget on Right Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                </group>
+                <group id="cat_page" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Cateogry Wise Post List Page</label>
+                    <field id="show_type" translate="label" type="select" sortOrder="6" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Show news as</label>
+                        <source_model>MageArray\News\Model\Config\Source\Listtype</source_model>
+                    </field>
+                    <field id="categorylist_oncat_left" translate="label" type="select" sortOrder="19" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Category Tree on Left Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="categorylist_oncat_right" translate="label" type="select" sortOrder="20"
+                           showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Category Tree on Right Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="popular_oncat_left" translate="label" type="select" sortOrder="21" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Popular Posts Widget on Left Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="popular_oncat_right" translate="label" type="select" sortOrder="22" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Popular Posts Widget on Right Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="latest_oncat_left" translate="label" type="select" sortOrder="23" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Latest Posts Widget on Left Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="latest_oncat_right" translate="label" type="select" sortOrder="24" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Latest Posts Widget on Right Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="archive_oncat_left" translate="label" type="select" sortOrder="25" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Archive Widget on Left Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="archive_oncat_right" translate="label" type="select" sortOrder="26" showInDefault="1"
+                           showInWebsite="1" showInStore="1">
+                        <label>Archive Posts Widget on Right Sidebar</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+
+                </group>
+            </group>
+            <group id="rss_feed" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Rss Feed</label>
+                <field id="title" translate="label comment" type="text" sortOrder="1" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Feed Title</label>
+                </field>
+                <field id="description" translate="label comment" type="textarea" sortOrder="2" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Feed Description</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

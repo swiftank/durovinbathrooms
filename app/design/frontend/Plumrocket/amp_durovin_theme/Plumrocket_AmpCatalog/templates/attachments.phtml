@@ -1,0 +1,18 @@
+<?php 
+/**
+ * Attachments
+ * 
+ * @author Slava Yurthev
+ */
+?>
+<?php if($this->getCollection()->count()>0): ?>
+	<ul>
+		<?php foreach($this->getCollection() as $attachment): ?>
+			<li style="  list-style-type: none;margin: 0;padding: 0;margin-left:-40px;">
+		
+<img style="margin-right:8px;" src="https://www.durovinbathrooms.com/pub/Blog/PDF-icon.svg" >		<a style="color:blue;font-size: 17px;position: absolute;" href="<?php echo $attachment->getUrl(); ?>"><?php echo $attachment->getData('filename'); ?></a>			</li>
+		<?php endforeach; ?>
+	</ul>
+<?php else: ?>
+	<p><?php echo __('No Instructions'); ?></p>
+<?php endif; ?>

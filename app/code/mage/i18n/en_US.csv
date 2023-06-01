@@ -1,0 +1,81 @@
+"Save and Apply","Save and Apply"
+"Save and Continue Edit","Save and Continue Edit"
+"Delete Tab","Delete Tab"
+"Edit Tab '%1'","Edit Tab '%1'"
+"New Tab","New Tab"
+"Show on Product Page","Show on Product Page"
+Position,Position
+"Apply the rule only if the following conditions are met (leave blank for all products).","Apply the rule only if the following conditions are met (leave blank for all products)."
+Conditions,Conditions
+General,General
+Name,Name
+"Custom Class","Custom Class"
+"Store View","Store View"
+"Customer Groups","Customer Groups"
+Priority,Priority
+Status,Status
+"Custom Template","Custom Template"
+"Product Template","Product Template"
+"General Information","General Information"
+"Manage Tabs","Manage Tabs"
+"Display Conditions","Display Conditions"
+"Add New Tab","Add New Tab"
+Settings,Settings
+"User Guide","User Guide"
+"Change Log","Change Log"
+"Get Support","Get Support"
+"The tab has been deleted.","The tab has been deleted."
+"We can't find a tab to delete.","We can't find a tab to delete."
+TabsPro,TabsPro
+"This tab no longer exists.","This tab no longer exists."
+"Edit Tab","Edit Tab"
+Tabs,Tabs
+"A total of %1 record(s) have been deleted.","A total of %1 record(s) have been deleted."
+"A total of %1 record(s) have been disabled.","A total of %1 record(s) have been disabled."
+"A total of %1 record(s) have been enabled.","A total of %1 record(s) have been enabled."
+"You saved the tab.","You saved the tab."
+"Something went wrong while saving the tab.","Something went wrong while saving the tab."
+Enabled,Enabled
+Disabled,Disabled
+"After Page Header","After Page Header"
+"After Page Header Top","After Page Header Top"
+"Before Main Columns","Before Main Columns"
+"Before Page Footer","Before Page Footer"
+"Before Page Footer Container","Before Page Footer Container"
+"Main Content Area","Main Content Area"
+"Main Content Aside","Main Content Aside"
+"Main Content Bottom","Main Content Bottom"
+"Main Content Container","Main Content Container"
+"Main Content Top","Main Content Top"
+"Page Bottom","Page Bottom"
+"Page Footer","Page Footer"
+"Page Footer Container","Page Footer Container"
+"Page Header","Page Header"
+"Page Header Container","Page Header Container"
+"Page Header Panel","Page Header Panel"
+"Page Top","Page Top"
+"Sidebar Additional","Sidebar Additional"
+"Sidebar Main","Sidebar Main"
+Edit,Edit
+Add,Add
+Delete,Delete
+"Add after","Add after"
+"Choose products the tab will be displayed for. Conditions and condition combinations allow you to narrow selection down to a specific range of products","Choose products the tab will be displayed for. Conditions and condition combinations allow you to narrow selection down to a specific range of products"
+"Add to Cart","Add to Cart"
+"In stock","In stock"
+"Out of stock","Out of stock"
+"Add to Wish List","Add to Wish List"
+"Add to Compare","Add to Compare"
+title,title
+"Save Tab","Save Tab"
+"Tabs Pro","Tabs Pro"
+"General Settings","General Settings"
+"Magezon TabsPro Tab","Magezon TabsPro Tab"
+Tab,Tab
+"Delete items","Delete items"
+"Are you sure you wan't to delete selected items?","Are you sure you wan't to delete selected items?"
+Disable,Disable
+Enable,Enable
+ID,ID
+Created,Created
+Modified,Modified

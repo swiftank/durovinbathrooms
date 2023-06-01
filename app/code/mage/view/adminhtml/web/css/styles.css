@@ -1,0 +1,287 @@
+.mgz-tabspro .admin__control-collapsible .admin__collapsible-block-wrapper.fieldset-wrapper {
+    margin-bottom: 1rem;
+}
+
+.mgz-tabspro .admin__control-collapsible .admin__collapsible-block-wrapper.fieldset-wrapper .fieldset-wrapper-title[aria-selected="true"] .admin__collapsible-title:before {
+    content: '\e615';
+}
+
+.mgz-tabspro .admin__field-group-columns.admin__field-control.admin__control-grouped {
+    margin-left: 0;
+}
+
+.mgz-tabspro .admin__control-group-equal>.admin__field {
+    margin-top: 0;
+}
+
+.mgz-tabspro .admin__collapsible-content, .mgz-tabspro.admin__collapsible-content {
+    visibility: visible;
+    max-height: none;
+    transform: none;
+}
+
+.admin__scope-old .form-inline .mgz-tabspro div:not([class*='fields-group'])>.field>.label {
+    width: 0;
+}
+
+.adminhtml-widget-instance-edit .mgz-tabspro .fieldset-wrapper .draggable-handle {
+    width: 20px;
+    background: none;
+    line-height: 16px;
+}
+
+.adminhtml-widget-instance-edit .mgz-tabspro [class*='admin__control-grouped']>.admin__field:first-child>.admin__field-label {
+    width: auto;
+}
+
+.adminhtml-widget-instance-edit .mgz-tabspro .admin__field:not(.admin__field-option)>.admin__field-label:before {
+    display: none;
+}
+
+.tabspro-tab-edit .ui-tabs-panel {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.show-product_image_height,
+.show-product_image_width {
+    display: none;
+}
+.show-product_image_height.active,
+.show-product_image_width.active {
+    display: block;
+}
+
+.tabspro-blocks .tabspro-block_column {
+    float: left;
+    margin-bottom: 15px;
+    display: none;
+}
+
+.tabspro-blocks .tabspro-block_column.active {
+    display: block;
+    width: 100%;
+}
+
+.tabspro-blocks .tabspro-block_column_inner {
+    display: block;
+    border: 1px solid #d9d9d9;
+    float: left;
+    width: 100%;
+    position: relative;
+}
+
+.tabspro-blocks .tabspro-block_title {
+    font-size: 18px;
+    font-weight: 600;
+    background: rgb(239, 239, 239);
+    padding: 8px 0px;
+    text-align: center;
+    position: relative;
+}
+
+.tabspro-blocks .tabspro-block_option {
+    float: left;
+    width: 100%;
+    margin-bottom: 10px
+}
+
+.tabspro-blocks .tabspro-block_option label {
+    width: 30%;
+    float: left;
+    line-height: 30px;
+    text-align: right;
+    cursor: pointer;
+}
+
+.tabspro-blocks .tabspro-block_option .control {
+    width: 65%;
+    float: left;
+    margin-left: 5%;
+}
+
+.tabspro-blocks .tabspro-block_title .admin__control-checkbox {
+    opacity: 1;
+    position: relative;
+}
+
+.tabspro-blocks .tabspro-block_option .control .admin__control-checkbox {
+    opacity: 1;
+    margin-top: 8px
+}
+
+.tabspro-blocks .tabspro-block_options {
+    float: left;
+    padding: 15px 0;
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #FFF;
+    z-index: 99;
+    width: 350px;
+    padding-right: 20px;
+    box-shadow: 2px 2px 10px 0 #aaaaaa;
+}
+
+.tabspro-blocks .tabspro-left_block_options .tabspro-block_options {
+    left: 0;
+}
+
+.tabspro-blocks .tabspro-block_options.active {
+    display: block;
+}
+
+.tabspro-blocks .tabspro-block_options .tabspro-block_option:last-child {
+    margin-bottom: 0;
+}
+
+.tabpro-block_settings {
+    position: absolute;
+    right: 0;
+    font-family: 'Admin Icons';
+    display: none;
+    top: 8px;
+    cursor: pointer;
+    right: 12px;
+}
+
+.tabspro-block_options2 {
+    display: none;
+}
+
+.tabspro-block_options2.active {
+    display: block;
+}
+
+.tabspro-block_options2 > div {
+    display: none;
+}
+
+.tabspro-block_options2 > div.active {
+    display: block
+}
+
+.tabspro-block_options2 textarea {
+    width: 100%;
+    border: 0;
+}
+
+.tabspro-block_options2.active {
+    display: block;
+}
+
+.tabpro-block_settings.active {
+    display: block;
+}
+
+.tabpro-block_settings:before {
+    content: "\e610";
+}
+
+.tabspro-top_block_options, .tabspro-bottom_block_options {
+    width: 100%;
+}
+
+.tabspro-block_row {
+    float: left;
+    width: 100%;
+}
+
+.tabspro-enable_block {
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+.tabspro-enable_block li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.tabspro-enable_block li input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.tabspro-enable_block li label:before {
+    margin-right: 5px
+}
+
+.tabspro-tab-edit .admin__control-table-wrapper {
+    overflow: visible;
+}
+
+.tabspro-block_options2_condition {
+    padding: 10px;
+}
+
+.mgz-tabspro .admin__control-collapsible .tabspro-block_options2_condition .tabspro-collapsible {
+    width: 49%;
+    float: left;
+}
+
+.mgz-tabspro .admin__control-collapsible .tabspro-block_options2_condition .tabspro-collapsible:last-child {
+    float: right
+}
+
+.mgz-tabspro .admin__control-collapsible .tabspro-block_options2_condition .admin__collapsible-block-wrapper.fieldset-wrapper ul {
+    list-style: none;
+}
+
+.mgz-tabspro .admin__control-collapsible .tabspro-block_options2_condition .admin__collapsible-block-wrapper.fieldset-wrapper .admin__collapsible-content label {
+    width: calc((100%)*.70 - 25px);
+    float: left;
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 3.2rem;
+    padding: 0;
+    white-space: nowrap;
+    word-wrap: break-word;
+    text-align: right;
+    padding-right: 30px;
+    cursor: pointer;
+}
+
+.mgz-tabspro .admin__control-collapsible .tabspro-block_options2_condition .admin__collapsible-block-wrapper.fieldset-wrapper ul li {
+    margin-bottom: 15px;
+    width: 50%;
+    float: left;
+}
+
+.tabspro-block_options2_condition .admin__control-text {
+    width: 80px;
+}
+
+.tabspro-tab-edit #edit_form .admin__control-collapsible .admin__collapsible-block-wrapper.fieldset-wrapper > .fieldset-wrapper-title {
+    background: #1979c3;
+    border-color: #1979c3;
+}
+
+.tabspro-tab-edit #edit_form .draggable-handle:before, .tabspro-tab-edit #edit_form .admin__control-collapsible .admin__collapsible-block-wrapper .fieldset-wrapper-title .admin__collapsible-title:before, .tabspro-tab-edit #edit_form .admin__control-collapsible .admin__collapsible-block-wrapper .fieldset-wrapper-title .action-delete {
+    color: #fff;
+}
+
+.tabspro-tab-edit #edit_form .tabspro-block_options2_condition .admin__collapsible-block-wrapper.fieldset-wrapper .fieldset-wrapper-title {
+    background: #f8f8f8;
+    border: 1px solid #d9d9d9;
+}
+
+.tabspro-tab-edit #edit_form .tabspro-block_options2_condition .admin__collapsible-block-wrapper .fieldset-wrapper-title .admin__collapsible-title:before, .tabspro-tab-edit #edit_form .tabspro-block_options2_condition .admin__collapsible-block-wrapper .fieldset-wrapper-title .action-delete {
+    color: #303030
+}
+
+.tabspro-tab-edit #edit_form .block-source {
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+
+.tabspro-tab-edit #edit_form .block-source label {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.tabspro-tab-edit #edit_form .admin__collapsible-content .admin__collapsible-title {
+    color: #FFF;
+}
+
+.tabspro-tab-edit #edit_form .tabspro-block_options2_condition .admin__collapsible-title {
+    color: #303030;
+}

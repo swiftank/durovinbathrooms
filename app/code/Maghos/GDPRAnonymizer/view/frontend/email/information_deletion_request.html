@@ -1,0 +1,29 @@
+<!--
+/**
+ *
+ * Maghos_Gdpr Magento 2 extension
+ *
+ * NOTICE OF LICENSE
+ *
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ *
+ * @category Maghos
+ * @package Maghos_Gdpr
+ * @copyright Copyright (c) 2018 Maghos s.r.o.
+ * @license http://www.maghos.com/business-license
+ * @author Magento dev team <support@maghos.com>
+ */
+-->
+<!--@subject {{trans "Information deletion request"}}@-->
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-information">
+        <td>
+            <p>{{trans "Delete all information associated to email %email:" email=$email}} <a href="{{var link}}">{{trans "Delete"}}</a>.</p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

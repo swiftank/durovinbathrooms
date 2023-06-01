@@ -1,0 +1,201 @@
+<?php
+	$_optionHelper = $this->helper('Codazon\ThemeOptions\Helper\Data');			 
+	$width = $_optionHelper->getConfig('general_section/product_view/base_image_width') ?: $block->getImageAttribute('product_page_image_medium', 'width'); 	 
+	$height = $_optionHelper->getConfig('general_section/product_view/base_image_height') ?: $block->getImageAttribute('product_page_image_medium', 'height');	
+	$thumbWidth = 	$_optionHelper->getConfig('general_section/product_view/moreview_image_width') ?: $block->getImageAttribute('product_page_image_small', 'width');	
+	$thumbHeight = 	$_optionHelper->getConfig('general_section/product_view/moreview_image_height') ?: $block->getImageAttribute('product_page_image_small', 'height');
+	$fullViewType = $_optionHelper->getConfig('general_section/product_view/full_view_type');
+	$allowFullScreen = is_null($fullViewType)?$block->getVar("gallery/allowfullscreen"):(($fullViewType!='pop_up')?'true':'false');
+?>
+
+<script type="text/javascript">
+	<?php $requireJs = ($fullViewType == 'popup')?"'jquery','Magento_Catalog/js/cdzZoom','Magento_Ui/js/modal/modal','js/jquery.nicescroll.min'":"'jquery','Magento_Catalog/js/cdzZoom','Magento_Ui/js/modal/modal'"; ?>
+	
+	require([<?php echo $requireJs ?>],function ($) {
+		var imgModal = false, $imgBox = false;
+		var widthImage = <?php /* @escapeNotVerified */ echo $width; ?>;
+        
+
+		$("[data-gallery-role=gallery-placeholder]").on("gallery:loaded",function () {
+			
+			var widthColumn = $('.columns').width();
+			var percentWidthImage = widthImage/widthColumn * 100;
+			var percentWidthInfo = 100 - percentWidthImage - 3;
+			if(percentWidthImage < 61)	
+			{
+				$('.product.media').css('width',percentWidthImage+'%');
+				$('.product-info-main').css('width',percentWidthInfo+'%');
+			}
+			<?php if($fullViewType == 'pop_up'): ?>
+			if( $('#cdz-img-box').length == 0 ){
+				var $this = $(this);
+				var $wrap = $('.fotorama__wrap',$this);
+				var $viewFullBtn = $('<a class="full-view" href="javascript:void(0)">Full</a>');
+				$imgBox = $('<div class="cdz-img-box" id="cdz-img-box"><div class="img-box-inner"><img class="full-img" src="" /></div></div>');
+				$viewFullBtn.appendTo($('.fotorama__stage',$wrap));
+				$imgBox.hide().appendTo('body');
+				imgModal = $imgBox.modal({
+					wrapperClass: 'product-image-box',
+					buttons: [],
+					innerScroll: true,
+					modalVisibleClass: '_show',
+					opened: function(){
+						$('#cdz-img-box').parents('.modal-content').first().niceScroll({cursorcolor:'#999999', cursorborder:'#747070'});
+					}
+				});
+				$viewFullBtn.on('click',function(e){
+					e.preventDefault();
+                    var bg = $('.fotorama__active .magnify').css('background-image');
+                    bg = bg.replace('url(','').replace(')','').replace(/\"/gi, "");
+					$('.full-img',$imgBox).attr('src',bg);
+					imgModal.modal('openModal');
+				});
+			}
+			<?php endif ?>
+		});
+	})
+</script>
+
+<div class="gallery-placeholder _block-content-loading" data-gallery-role="gallery-placeholder">
+    <?php
+            $images = $block->getGalleryImagesJson();
+            $imagesData = json_decode($images,true);
+            $mainImage = '';
+            $mainThumbHtml = '';
+            if(count($imagesData)>0){
+                foreach($imagesData as $key=>$value){
+                    if(isset($value['isMain']) && $value['isMain'] == 1){
+                        $mainImage = $value['img'];
+                     
+                        $mainThumbHtml.='<div class="fotorama__nav__frame fotorama__nav__frame--thumb fotorama__active" tabindex="0" role="button" data-gallery-role="nav-frame" data-nav-type="thumb" aria-label="'.$value['caption'].'" style="width: '.$thumbWidth.'px" data-active="true" fast-image="yes" >
+                                <div class="fotorama__thumb fotorama_vertical_ratio fotorama__loaded fotorama__loaded--img"><img src="'.$value['thumb'].'" class="fotorama__img" aria-hidden="false">
+                                </div>
+                            </div>';
+                    }else{
+                        $mainThumbHtml.='<div class="fotorama__nav__frame fotorama__nav__frame--thumb" tabindex="0" role="button" data-gallery-role="nav-frame" data-nav-type="thumb" aria-label="'.$value['caption'].'" style="width: '.$thumbWidth.'px" data-active="true" fast-image="yes">
+                                <div class="fotorama__thumb fotorama_vertical_ratio fotorama__loaded fotorama__loaded--img"><img src="'.$value['thumb'].'" class="fotorama__img" aria-hidden="false">
+                                </div>
+                            </div>';
+                    }
+                }
+
+            }
+        ?>
+<div class="fotorama-item fotorama" data-gallery-role="gallery">
+<div data-gallery-role="fotorama__focusable-start" tabindex="-1"></div>
+<div  class="fotorama__wrap fotorama__wrap--css3 fotorama__wrap--slide fotorama__wrap--toggle-arrows fotorama__wrap--no-controls" style="min-width: 10px; max-width: 100%;">
+<div class="fotorama__stage" data-fotorama-stage="fotorama__stage" style="height: 38em;">
+<div class="fotorama__fullscreen-icon" data-gallery-role="fotorama__fullscreen-icon" tabindex="0" aria-label="Exit fullscreen" role="button"></div>
+<div class="fotorama__arr fotorama__arr--prev" tabindex="0" role="button" aria-label="Previous" data-gallery-role="arrow">
+<div class="fotorama__arr__arr"></div>
+</div>
+<div class="fotorama__stage__shaft fotorama__grab" tabindex="0" data-gallery-role="stage-shaft" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px); margin-left: 0px; width: 100%">
+	<div id = "tempMain" class="fotorama__stage__frame fotorama__loaded fotorama__loaded--img fotorama__active" aria-hidden="false" data-active="true" href="<?php echo $mainImage; ?>" style="left: 0px;">
+		<img src="<?php echo $mainImage; ?>" class="fotorama__img" aria-hidden="false">
+	</div>
+</div>
+
+<div class="fotorama__arr fotorama__arr--next" tabindex="0" role="button" aria-label="Next" data-gallery-role="arrow">
+<div class="fotorama__arr__arr"></div>
+</div>
+<div class="fotorama__video-close"></div>
+<div class="fotorama__zoom-in zoom-in-loaded" data-gallery-role="fotorama__zoom-in" aria-label="Zoom in" role="button" tabindex="0"></div>
+<div class="fotorama__zoom-out zoom-out-loaded" data-gallery-role="fotorama__zoom-out" aria-label="Zoom out" role="button" tabindex="0"></div>
+
+</div>
+
+<div class="fotorama__nav-wrap fotorama__nav-wrap--horizontal" data-gallery-role="nav-wrap">
+<div class="fotorama__nav" style="height: 64px; width: <?php echo $width;?>px;">
+
+<div class="fotorama__thumb__arr fotorama__thumb__arr--left fotorama__arr--disabled" role="button" aria-label="Previous" data-gallery-role="arrow" tabindex="-1" disabled="disabled">
+<div class="fotorama__thumb--icon"></div>
+</div>
+<div class="fotorama__nav__shaft" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
+</div>
+
+<div class="fotorama__thumb__arr fotorama__thumb__arr--right fotorama__arr--disabled" role="button" aria-label="Next" data-gallery-role="arrow" tabindex="-1" disabled="disabled">
+<div class="fotorama__thumb--icon"></div>
+</div>
+</div>
+</div>
+
+</div>
+<div data-gallery-role="fotorama__focusable-end" tabindex="-1"></div>
+</div>
+<div class="magnifier-preview magnify-hidden" data-gallery-role="magnifier" id="preview" style="display: none;"></div>
+</div>
+           
+
+<script>
+    var config = {
+            "width": <?php /* @escapeNotVerified */ echo $width; ?>,
+            "thumbheight": <?php /* @escapeNotVerified */ echo $thumbHeight ?: $thumbWidth; ?>,
+            "navtype": "<?php /* @escapeNotVerified */  echo $block->getVar("gallery/navtype"); ?>",
+            "height": <?php /* @escapeNotVerified */ echo $height; ?>
+        },
+        thumbBarHeight = 0;
+
+
+    if (config.navtype === 'horizontal') {
+        thumbBarHeight = config.thumbheight;
+    }  
+require(['jquery'], function($){ 
+    //when the gallery fully loads, remove the placeholder
+    $(function(){
+        setTimeout(function(){ $("#tempMain").remove()}, 2500);
+    });
+ });
+ var data_ = <?php /* @escapeNotVerified */ echo $block->getGalleryImagesJson(); ?>
+</script>
+
+
+<script type="text/x-magento-init">
+    {
+        "[data-gallery-role=gallery-placeholder]": {
+            "Xumulus_FastGalleryLoad/js/gallery/custom_gallery": {
+                "mixins":["magnifier/magnify"],
+                "magnifierOpts": <?php /* @escapeNotVerified */ echo $block->getMagnifier(); ?>,
+                "data": <?php /* @escapeNotVerified */ echo $block->getGalleryImagesJson(); ?>,
+                "options": {
+                    "nav": "<?php /* @escapeNotVerified */ echo $block->getVar("gallery/nav"); ?>",
+                    "loop": <?= /* @escapeNotVerified */ $block->getVar("gallery/loop") ? 'true' : 'false' ?>,
+                    "keyboard": <?= /* @escapeNotVerified */ $block->getVar("gallery/keyboard") ? 'true' : 'false' ?>,
+                    "arrows": <?= /* @escapeNotVerified */ $block->getVar("gallery/arrows") ? 'true' : 'false' ?>,
+                    "allowfullscreen": <?= /* @escapeNotVerified */ $block->getVar("gallery/allowfullscreen") ? 'true' : 'false' ?>,
+                    "showCaption": <?= /* @escapeNotVerified */ $block->getVar("gallery/caption") ? 'true' : 'false' ?>,
+                    "width": <?php /* @escapeNotVerified */ echo $width; ?>,
+                    "thumbwidth": <?php /* @escapeNotVerified */ echo $thumbWidth; ?>,
+                    "thumbheight": <?php /* @escapeNotVerified */ echo $thumbHeight
+                        ?: $thumbWidth; ?>,
+                    "height": <?php /* @escapeNotVerified */ echo $height
+                        ?: $width ?>,
+                    <?php if ($block->getVar("gallery/transition/duration")): ?>
+                        "transitionduration": <?php /* @escapeNotVerified */  echo $block->getVar("gallery/transition/duration"); ?>,
+                    <?php endif; ?>
+                    "transition": "<?php /* @escapeNotVerified */  echo $block->getVar("gallery/transition/effect"); ?>",
+                    <?php if (($block->getVar("gallery/navarrows"))): ?>
+                        "navarrows": <?php /* @escapeNotVerified */  echo $block->getVar("gallery/navarrows"); ?>,
+                    <?php endif; ?>
+                    "navtype": "<?php /* @escapeNotVerified */  echo $block->getVar("gallery/navtype"); ?>",
+                    "navdir": "<?php /* @escapeNotVerified */  echo $block->getVar("gallery/navdir"); ?>"
+                },
+                "fullscreen": {
+                    "nav": "<?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/nav") ?>",
+                    "loop": <?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/loop") ? 'true' : 'false' ?>,
+                    "navdir": "<?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/navdir") ?>",
+                    "navarrows": <?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/navarrows") ? 'true' : 'false' ?>,
+                    "navtype": "<?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/navtype") ?>",
+                    "arrows": <?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/arrows") ? 'true' : 'false' ?>,
+                    "showCaption": <?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/caption") ? 'true' : 'false' ?>,
+                    <?php if ($block->getVar("gallery/fullscreen/transition/duration")): ?>
+                        "transitionduration": <?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/transition/duration") ?>,
+                        <?php endif; ?>
+                    "transition": "<?= /* @escapeNotVerified */ $block->getVar("gallery/fullscreen/transition/effect") ?>"
+                },
+                "breakpoints": <?php /* @escapeNotVerified */ echo $block->getBreakpoints(); ?>
+            }
+        }
+    }
+</script>
+
+

@@ -1,0 +1,28 @@
+<script type="text/javascript">
+        require([
+            'jquery',
+            'domReady!'
+        ], function ($) {
+           var box = document.getElementById('main');
+			var check = document.getElementById('img0');
+			var check1 = document.getElementById('img1');
+			var check2 = document.getElementById('img2');
+			var check3 = document.getElementById('img3');
+			var img_0 = check.src;
+			var img_1 = check1.src;
+			var img_2 = check2.src;
+			var img_3 = check3.src;
+			check.onclick = function () {
+				box.src = img_0
+			};
+			check1.onclick = function () {
+				box.src = img_1
+			};
+			check2.onclick = function () {
+				box.src = img_2
+			};
+			check3.onclick = function () {
+				box.src = img_3
+			};
+        });
+  </script>

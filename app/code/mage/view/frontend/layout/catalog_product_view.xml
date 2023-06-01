@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magezon
+ *
+ * This source file is subject to the Magezon Software License, which is available at https://magezon.com/license/.
+ * Do not edit or add to this file if you wish to upgrade the to newer versions in the future.
+ * If you wish to customize this module for your needs.
+ * Please refer to https://www.magezon.com for more information.
+ *
+ * @category  Magezon
+ * @package   Magezon_TabsPro
+ * @copyright Copyright (C) 2018 Magezon (https://magezon.com)
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		<referenceContainer name="page.top">
+			<block class="Magezon\TabsPro\Block\Page\Tabs" name="page.top.tabspro.product.tabs">
+				<arguments>
+					<argument name="block_type" xsi:type="string">page.top</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="top.container">
+			<block class="Magezon\TabsPro\Block\Page\Tabs" name="top.container.tabspro.product.tabs">
+				<arguments>
+					<argument name="block_type" xsi:type="string">top.container</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="columns.top">
+			<block class="Magezon\TabsPro\Block\Page\Tabs" name="columns.top.tabspro.product.tabs">
+				<arguments>
+					<argument name="block_type" xsi:type="string">columns.top</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="page.bottom">
+			<block class="Magezon\TabsPro\Block\Page\Tabs" name="page.bottom.tabspro.product.tabs">
+				<arguments>
+					<argument name="block_type" xsi:type="string">page.bottom</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="page.bottom.container">
+			<block class="Magezon\TabsPro\Block\Page\Tabs" name="page.bottom.container.tabspro.product.tabs">
+				<arguments>
+					<argument name="block_type" xsi:type="string">page.bottom.container</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="content">
+			<block class="Magezon\TabsPro\Block\Page\Tabs" name="content.tabspro.product.tabs">
+				<arguments>
+					<argument name="block_type" xsi:type="string">content</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="content.aside">
+			<block class="Magezon\TabsPro\Block\Page\Tabs" name="content.aside.tabspro.product.tabs">
+				<arguments>
+					<argument name="block_type" xsi:type="string">content.aside</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="content.bottom">
+			<block class="Magezon\TabsPro\Block\Page\Tabs" name="content.bottom.tabspro.product.tabs">
+				<arguments>
+					<argument name="block_type" xsi:type="string">content.bottom</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="main">
+			<block class="Magezon\TabsPro\Block\Page\Tabs" name="main.tabspro.product.tabs">
+				<arguments>
+					<argument name="block_type" xsi:type="string">main</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="content.top">
+			<block class="Magezon\TabsPro\Block\Page\Tabs" name="content.top.tabspro.product.tabs">
+				<arguments>
+					<argument name="block_type" xsi:type="string">content.top</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="before.body.end">
+			<block class="Magezon\TabsPro\Block\Page\Tabs" name="before.body.end.tabspro.product.tabs">
+				<arguments>
+					<argument name="block_type" xsi:type="string">before.body.end</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="footer">
+			<block class="Magezon\TabsPro\Block\Page\Tabs" name="footer.tabspro.product.tabs">
+				<arguments>
+					<argument name="block_type" xsi:type="string">footer</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="footer-container">
+			<block class="Magezon\TabsPro\Block\Page\Tabs" name="footer.container.tabspro.product.tabs">
+				<arguments>
+					<argument name="block_type" xsi:type="string">footer-container</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="header-wrapper">
+			<block class="Magezon\TabsPro\Block\Page\Tabs" name="header.wrapper.tabspro.product.tabs">
+				<arguments>
+					<argument name="block_type" xsi:type="string">header-wrapper</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="header.container">
+			<block class="Magezon\TabsPro\Block\Page\Tabs" name="header.container.tabspro.product.tabs">
+				<arguments>
+					<argument name="block_type" xsi:type="string">header.container</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="header.panel">
+			<block class="Magezon\TabsPro\Block\Page\Tabs" name="header.panel.tabspro.product.tabs">
+				<arguments>
+					<argument name="block_type" xsi:type="string">header.panel</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="after.body.start">
+			<block class="Magezon\TabsPro\Block\Page\Tabs" name="after.body.start.tabspro.product.tabs">
+				<arguments>
+					<argument name="block_type" xsi:type="string">after.body.start</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="sidebar.additional">
+			<block class="Magezon\TabsPro\Block\Page\Tabs" name="sidebar.additional.tabspro.product.tabs">
+				<arguments>
+					<argument name="block_type" xsi:type="string">sidebar.additional</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+		<referenceContainer name="sidebar.main">
+			<block class="Magezon\TabsPro\Block\Page\Tabs" name="sidebar.main.tabspro.product.tabs">
+				<arguments>
+					<argument name="block_type" xsi:type="string">sidebar.main</argument>
+				</arguments>
+			</block>
+		</referenceContainer>
+	</body>
+</page>

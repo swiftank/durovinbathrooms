@@ -1,0 +1,231 @@
+<?php /** @var $block \Magezon\TabsPro\Block\ProductList */ ?>
+<?php
+$coreHelper = $this->helper('\Magezon\Core\Helper\Data');
+$tabId      = $block->getTabBlockId();
+$tabPro     = $block->getTabPro();
+$tabs       = $tabPro->getTabs();
+$_tab       = [];
+foreach ($tabs as $k => $v) {
+	if ($k == $tabId) {
+		$_tab = $v;
+		break;
+	}
+}
+?>
+<?php if (!empty($_tab)) { ?>
+<?php if ($_tab['description']) { ?>
+<div class="tab-description">
+	<?php echo $coreHelper->filter($_tab['description']);  ?>
+</div>
+<?php } ?>
+
+<div class="tab-content-wrapper">
+	<?php if (isset($_tab['top_enable']) && $_tab['top_enable'] == 'on') { ?>
+	<?php $style = '';
+	if ($_tab['top_width']) {
+		$style .= 'width: ' . $_tab['top_width'] . ';';
+	}
+	if ($_tab['top_height']) {
+		$style .= 'height: ' . $_tab['top_height'] . ';';
+	}
+	if ($_tab['top_padding']) {
+		$style .= 'padding: ' . $_tab['top_padding'] . ';';
+	}
+	if ($_tab['top_margin']) {
+		$style .= 'margin: ' . $_tab['top_margin'] . ';';
+	}
+	if ($style) {
+		$style = 'style="' . $style . '"';
+	}
+	?>
+	<div id="<?php echo $tabId ?>_top" class="tab-item-top <?php echo $_tab['top_custom_class'] ?>" <?php echo $style ?>>
+		<?php if ($_tab['top_type'] == 'condition') { ?>
+		<?php $items = $block->getProductCollection($tabId, 'top', $_tab); ?>
+		<?php
+		$data = [];
+		$data['items'] = $items;
+		foreach ($_tab as $k => $tabData) {
+			if (substr( $k, 0, 3 ) == 'top') {
+				$data[str_replace("top_", "", $k)] = $tabData;
+			}
+		}
+		$data['tab_id'] = $tabId;
+		$data['tab_block_html_id'] = $tabId . '_top';
+		$data['widget_id'] = $block->getWidgetId();
+		?>
+		<?php echo $block->getProductListHtml($tabPro, $_tab, $data); ?>
+		<?php } ?>
+		<?php if ($_tab['top_type'] == 'html' && $_tab['top_html']) { ?>
+		<?php echo $coreHelper->filter($_tab['top_html']);  ?>
+		<?php } ?>
+	</div>
+	<?php } ?>
+
+	<?php if ((isset($_tab['left_enable']) && $_tab['left_enable'] == 'on') || (isset($_tab['maincontent_enable']) && $_tab['maincontent_enable'] == 'on') || (isset($_tab['right_enable']) && $_tab['right_enable'] == 'on')) { ?>
+
+	<div class="tab-item-content-wrapper">
+		<?php if (isset($_tab['left_enable']) && $_tab['left_enable'] == 'on') { ?>
+		<?php $style = '';
+		if ($_tab['left_width']) {
+			$style .= 'width: ' . $_tab['left_width'] . ';';
+		}
+		if ($_tab['left_height']) {
+			$style .= 'height: ' . $_tab['left_height'] . ';';
+		}
+		if ($_tab['left_padding']) {
+			$style .= 'padding: ' . $_tab['left_padding'] . ';';
+		}
+		if ($_tab['left_margin']) {
+			$style .= 'margin: ' . $_tab['left_margin'] . ';';
+		}
+		if ($style) {
+			$style = 'style="' . $style . '"';
+		}
+		?>
+		<div id="<?php echo $tabId ?>_left" class="tab-item-left <?php echo $_tab['left_custom_class'] ?>" <?php echo $style ?>>
+			<?php if ($_tab['left_type'] == 'condition') { ?>
+			<?php $items = $block->getProductCollection($tabId, 'left', $_tab); ?>
+			<?php
+			$data = [];
+			$data['items'] = $items;
+			foreach ($_tab as $k => $tabData) {
+				if (substr( $k, 0, 4 ) == 'left') {
+					$data[str_replace("left_", "", $k)] = $tabData;
+				}
+			}
+			$data['tab_id'] = $tabId;
+			$data['tab_block_html_id'] = $tabId . '_left';
+			$data['widget_id'] = $block->getWidgetId();
+			?>
+			<?php echo $block->getProductListHtml($tabPro, $_tab, $data); ?>
+			<?php } ?>
+			<?php if ($_tab['left_type'] == 'html' && $_tab['left_html']) { ?>
+			<?php echo $coreHelper->filter($_tab['left_html']);  ?>
+			<?php } ?>
+		</div>
+		<?php } ?>
+		<?php if (isset($_tab['maincontent_enable']) && $_tab['maincontent_enable'] == 'on') { ?>
+		<?php $style = '';
+		if ($_tab['maincontent_width']) {
+			$style .= 'width: ' . $_tab['maincontent_width'] . ';';
+		}
+		if ($_tab['maincontent_height']) {
+			$style .= 'height: ' . $_tab['maincontent_height'] . ';';
+		}
+		if ($_tab['maincontent_padding']) {
+			$style .= 'padding: ' . $_tab['maincontent_padding'] . ';';
+		}
+		if ($_tab['maincontent_margin']) {
+			$style .= 'margin: ' . $_tab['maincontent_margin'] . ';';
+		}
+		if ($style) {
+			$style = 'style="' . $style . '"';
+		}
+		?>
+		<div id="<?php echo $tabId ?>_maincontent" class="tab-item-maincontent <?php echo $_tab['maincontent_custom_class'] ?>" <?php echo $style ?>>
+			<?php if ($_tab['maincontent_type'] == 'condition') { ?>
+			<?php $items = $block->getProductCollection($tabId, 'maincontent', $_tab); ?>
+			<?php
+			$data = [];
+			$data['items'] = $items;
+			foreach ($_tab as $k => $tabData) {
+				if (substr( $k, 0, 11 ) == 'maincontent') {
+					$data[str_replace("maincontent_", "", $k)] = $tabData;
+				}
+			}
+			$data['tab_id'] = $tabId;
+			$data['tab_block_html_id'] = $tabId . '_maincontent';
+			$data['widget_id'] = $block->getWidgetId();
+			?>
+			<?php echo $block->getProductListHtml($tabPro, $_tab, $data); ?>
+			<?php } ?>
+			<?php if ($_tab['maincontent_type'] == 'html' && $_tab['maincontent_html']) { ?>
+			<?php echo $coreHelper->filter($_tab['maincontent_html']);  ?>
+			<?php } ?>
+		</div>
+		<?php } ?>
+		<?php if (isset($_tab['right_enable']) && $_tab['right_enable'] == 'on') { ?>
+		<?php $style = '';
+		if ($_tab['right_width']) {
+			$style .= 'width: ' . $_tab['right_width'] . ';';
+		}
+		if ($_tab['right_height']) {
+			$style .= 'height: ' . $_tab['right_height'] . ';';
+		}
+		if ($_tab['right_padding']) {
+			$style .= 'padding: ' . $_tab['right_padding'] . ';';
+		}
+		if ($_tab['right_margin']) {
+			$style .= 'margin: ' . $_tab['right_margin'] . ';';
+		}
+		if ($style) {
+			$style = 'style="' . $style . '"';
+		}
+		?>
+		<div id="<?php echo $tabId ?>_right" class="tab-item-right <?php echo $_tab['right_custom_class'] ?>" <?php echo $style ?>>
+			<?php if ($_tab['right_type'] == 'condition') { ?>
+			<?php $items = $block->getProductCollection($tabId, 'right', $_tab); ?>
+			<?php
+			$data = [];
+			$data['items'] = $items;
+			foreach ($_tab as $k => $tabData) {
+				if (substr( $k, 0, 5 ) == 'right') {
+					$data[str_replace("right_", "", $k)] = $tabData;
+				}
+			}
+			$data['tab_id'] = $tabId;
+			$data['tab_block_html_id'] = $tabId . '_right';
+			$data['widget_id'] = $block->getWidgetId();
+			?>
+			<?php echo $block->getProductListHtml($tabPro, $_tab, $data); ?>
+			<?php } ?>
+			<?php if ($_tab['right_type'] == 'html' && $_tab['right_html']) { ?>
+			<?php echo $coreHelper->filter($_tab['right_html']);  ?>
+			<?php } ?>
+		</div>
+		<?php } ?>
+	</div>
+	<?php } ?>
+
+	<?php if (isset($_tab['bottom_enable']) && $_tab['bottom_enable'] == 'on') { ?>
+	<?php $style = '';
+	if ($_tab['bottom_width']) {
+		$style .= 'width: ' . $_tab['bottom_width'] . ';';
+	}
+	if ($_tab['bottom_height']) {
+		$style .= 'height: ' . $_tab['bottom_height'] . ';';
+	}
+	if ($_tab['bottom_padding']) {
+		$style .= 'padding: ' . $_tab['bottom_padding'] . ';';
+	}
+	if ($_tab['bottom_margin']) {
+		$style .= 'margin: ' . $_tab['bottom_margin'] . ';';
+	}
+	if ($style) {
+		$style = 'style="' . $style . '"';
+	}
+	?>
+	<div id="<?php echo $tabId ?>_bottom" class="tab-item-bottom <?php echo $_tab['bottom_custom_class'] ?>" <?php echo $style ?>>
+		<?php if ($_tab['bottom_type'] == 'condition') { ?>
+		<?php $items = $block->getProductCollection($tabId, 'bottom', $_tab); ?>
+		<?php
+		$data = [];
+		$data['items'] = $items;
+		foreach ($_tab as $k => $tabData) {
+			if (substr( $k, 0, 6 ) == 'bottom') {
+				$data[str_replace("bottom_", "", $k)] = $tabData;
+			}
+		}
+		$data['tab_id'] = $tabId;
+		$data['tab_block_html_id'] = $tabId . '_bottom';
+		$data['widget_id'] = $block->getWidgetId();
+		?>
+		<?php echo $block->getProductListHtml($tabPro, $_tab, $data); ?>
+		<?php } ?>
+		<?php if ($_tab['bottom_type'] == 'html' && $_tab['bottom_html']) { ?>
+		<?php echo $coreHelper->filter($_tab['bottom_html']);  ?>
+		<?php } ?>
+	</div>
+	<?php } ?>
+</div>
+<?php } ?>

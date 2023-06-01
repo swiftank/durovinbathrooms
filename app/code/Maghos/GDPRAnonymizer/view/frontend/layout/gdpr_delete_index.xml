@@ -1,0 +1,34 @@
+<?xml version="1.0"?><!--
+/**
+ *
+ * Maghos_Gdpr Magento 2 extension
+ *
+ * NOTICE OF LICENSE
+ *
+ * Unauthorized copying of this file, via any medium is strictly prohibited
+ * Proprietary and confidential
+ *
+ * @category Maghos
+ * @package Maghos_Gdpr
+ * @copyright Copyright (c) 2018 Maghos s.r.o.
+ * @license http://www.maghos.com/business-license
+ * @author Magento dev team <support@maghos.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">Request personal information deletion</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Magento\Cms\Block\Block" name="gdpr-info">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">gdpr-info</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Template" name="gdpr_delete" template="Maghos_Gdpr::delete/index.phtml"/>
+        </referenceContainer>
+    </body>
+</page>
