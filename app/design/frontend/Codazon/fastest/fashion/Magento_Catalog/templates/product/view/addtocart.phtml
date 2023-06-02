@@ -9,6 +9,9 @@
 /** @var $block \Magento\Catalog\Block\Product\View */
 ?>
 <?php $_product = $block->getProduct(); ?>
+<?php $_objectManager = \Magento\Framework\App\ObjectManager::getInstance(); ?>
+<?php $category = $_objectManager->create('Magento\Catalog\Model\Category')->load($_product['category_id']); ?>
+
 <?php 
 $qtyIncrements = 1;
 $dataValidate = $block->getQuantityValidators();
@@ -106,7 +109,10 @@ if(isset($dataValidate["validate-item-quantity"]["qtyIncrements"])){
                         'currency': "GBP",
                         items: [{
                             'item_name': '<?php echo $_product['name']; ?>',
-                            'item_list_id': '<?php echo $_product['sku']; ?>',
+                            'item_id': '<?php echo $_product['sku']; ?>',
+                            'item_list_id': '<?php echo strtolower(preg_replace('#[ -]+#', '_', $category->getName())) ; ?>',
+                            'item_category': '<?php echo $category->getName(); ?>',
+                            'item_list_name': '<?php echo $category->getName(); ?>',
                             'price': parseFloat($('.price-final_price .price')[0].innerText.replace('£','')),
                             'quantity': 1
 
@@ -132,13 +138,14 @@ if(isset($dataValidate["validate-item-quantity"]["qtyIncrements"])){
                     'currency': "GBP",
                     items: [{
                         'item_name': '<?php echo $_product['name']; ?>',
-                        'item_list_id': '<?php echo $_product['sku']; ?>',
+                        'item_id': '' + $(this).attr('data-pr-sku') + '',
+                        'item_list_id': '<?php echo strtolower(preg_replace('#[ -]+#', '_', $category->getName())) ; ?>',
+                        'item_category': '<?php echo $category->getName(); ?>',
+                        'item_list_name': '<?php echo $category->getName(); ?>',
                         'price': parseFloat($('.price-final_price .price')[0].innerText.replace('£','')),
                         'quantity': parseFloat($('#qty').val())
-
-                    }]
-                });
-
+                     }]});
+                     console.log('debug', dataLayer);
                 return false;
             }
         });
@@ -158,16 +165,20 @@ if(isset($dataValidate["validate-item-quantity"]["qtyIncrements"])){
                             'data-pr-name') +
                         '',
                     'price': parseFloat($(this).attr('data-pr-price')),
+                    'item_list_id': '<?php echo strtolower(preg_replace('#[ -]+#', '_', $category->getName())) ; ?>',
+                    'item_list_name': "<?php echo $category->getName(); ?>'",
                     'item_id': '' + $(this).attr('data-pr-sku') + '',
                     'quantity': 1,
+                    'item_category': '<?php echo $category->getName(); ?>',
+                    
                 }]
-
-
             });
             $(this).parents('form:first').submit();
             return false;
         });
     })
     });
+
+    console.log('debug', dataLayer);
 </script>
 <?php endif; ?>
