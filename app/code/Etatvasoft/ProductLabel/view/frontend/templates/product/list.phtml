@@ -34,9 +34,11 @@ $productLabelHelper = $this->helper('Etatvasoft\ProductLabel\Helper\ProductLabel
         <ol class="products list items product-items">
             <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
             <?php foreach ($_productCollection as $_product) : ?>
+              
                 <?= /* @escapeNotVerified */ ($iterator++ == 1) ? '<li class="item product product-item">' : '</li><li class="item product product-item">' ?>
                 <div 
                 data-pr-sku='<?= $block->escapeHtml($_product->getSku())?>'
+                data-offer='<?= $productLabelHelper->getProductLabelType($_product) == 'text' ? 1 : 0 ?>'
                 data-category='<?= $_product->getData('document_source')['category'][1]['name']; ?>'
                 data-pr-name='<?= $block->escapeHtml($_product->getName()) ?>'
                 class="product-item-info" data-container="product-<?= /* @escapeNotVerified */ $viewMode ?>">
@@ -187,72 +189,106 @@ $productLabelHelper = $this->helper('Etatvasoft\ProductLabel\Helper\ProductLabel
      *  Author: Ankush Kumar
      */
     var listData = {};
+    var selectPromotionData = {};
     var item = []
-        $('.product-item-info').each(function(i) {
-            var dat = {
-            item_id: "" + $(this).attr('data-pr-sku') + "",
-            item_name: "" + $(this).attr('data-pr-name') + "",
-            index: i,
-            item_category:  "" +  $(this).attr('data-category') + "",
-           
-        }
-        if(typeof($(this).attr('data-pr-sku') ) != 'undefined'){
-            item.push({
-            ...dat
-        });
-        
-        listData = {
-            item_list_id: "" +  $(this).attr('data-category').replace(/\s+/g, '_').toLowerCase() + "",
-            item_list_name: "" +  $(this).attr('data-category') + "",
-            items: item
-        }
-        }
+    var dat = {};
+    var promname = 'Empty Promotion';
+    switch (true) {
+        case window.location.href.indexOf("clearance") > -1:
+            promname = 'Clearance Promotion';
 
-       
+            break;
+        case window.location.href.indexOf("on-sale") > -1:
+            promname = 'On Sale Promotion';
+
+            break;
+        default:
+            promname = 'Offers Promotion';
+
+    }
+        $('.product-item-info').each(function(i) {
+
+            if(typeof($(this).attr('data-category') ) != 'undefined'){
+                var dat = {
+                    item_id: "" + $(this).attr('data-pr-sku') + "",
+                    item_name: "" + $(this).attr('data-pr-name') + "",
+                    index: i,
+                    item_category:  "" +  $(this).attr('data-category') + "",
+                    item_list_id: "" +  $(this).attr('data-category').replace(/\s+/g, '_').toLowerCase() + "",
+                    item_list_name: "" +  $(this).attr('data-category') + "",
+            
+                }
+            }
+           
+            if(typeof($(this).attr('data-pr-sku') ) != 'undefined'){
+
+                item.push({
+                    ...dat
+                });
+        
+                listData = {
+                    item_list_id: "" +  $(this).attr('data-category').replace(/\s+/g, '_').toLowerCase() + "",
+                    item_list_name: "" +  $(this).attr('data-category') + "",
+                    items: item
+                }
+
+                selectPromotionData = {
+                    creative_name: promname, 
+                    creative_slot: "offers", 
+                    promotion_id: "" + location.pathname.substring(1) + "",  
+                    promotion_name: promname, 
+                }
+
+            }
+
+           
+            /**
+             *  Trigger Select_Item event on item click  Product category page 
+             *  Author: Ankush Kumar
+            */
+            $(this).on("click", function(e) {
+                e.preventDefault();
+                alert(parseInt($(this).attr('data-offer')));
+            
+                if (parseInt($(this).attr('data-offer'))) {
+
+                    gtag("event", "select_promotion", {  ...selectPromotionData, items: listData.items[i] })
+                
+                    
+                } else {
+                    gtag("event", "select_item", { ...listData , items: listData.items[i] })
+                };
+
+            })
             
     })
 
-     /**
-     *  Trigger event when customer lands first time on page 
-     *  Author: Ankush Kumar
-     */
-    var hasVisited = sessionStorage.getItem('visited');
-    if (hasVisited != window.location.href) {
-        sessionStorage.setItem('visited', window.location.href);
-        var promname = 'Empty Promotion';
-        switch (true) {
-            case window.location.href.indexOf("clearance") > -1:
-                promname = 'Clearance Promotion';
 
-                break;
-            case window.location.href.indexOf("on-sale") > -1:
-                promname = 'On Sale Promotion';
+        /**
+         *  Trigger event when customer lands first time on page 
+         *  Author: Ankush Kumar
+         */
+        var hasVisited = sessionStorage.getItem('visited');
+        if (hasVisited != window.location.href) {
+            sessionStorage.setItem('visited', window.location.href);
 
-                break;
-            default:
-                promname = 'Offers Promotion';
+            if (window.location.href.indexOf("offers") > -1) {
+                /**
+                 *  Event: view_promotion 
+                */ 
+                gtag("event", "view_promotion", listData);
 
-        }
+            } else {
 
-        if (window.location.href.indexOf("offers") > -1) {
+                /**
+                 *  Event: view_item_list 
+                */ 
+                gtag("event", "view_item_list", listData);
 
-            /**
-             *  Event: view_promotion 
-            */ 
-            gtag("event", "view_promotion", listData);
+            }
 
-        } else {
-
-            /**
-             *  Event: view_item_list 
-            */ 
-            gtag("event", "view_item_list", listData);
-
-        }
-        
+        }    
         console.log('debug', dataLayer);
-    }    
-
 
     });
 </script>
