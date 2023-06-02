@@ -41,6 +41,7 @@ $productLabelHelper = $this->helper('Etatvasoft\ProductLabel\Helper\ProductLabel
                 data-offer='<?= $productLabelHelper->getProductLabelType($_product) == 'text' ? 1 : 0 ?>'
                 data-category='<?= $_product->getData('document_source')['category'][1]['name']; ?>'
                 data-pr-name='<?= $block->escapeHtml($_product->getName()) ?>'
+                data-pr-price='<?= $block->escapeHtml($_product->getPrice()) ?>'
                 class="product-item-info" data-container="product-<?= /* @escapeNotVerified */ $viewMode ?>">
                     <?php
                     //if there is product label found then display label
@@ -102,9 +103,6 @@ $productLabelHelper = $this->helper('Etatvasoft\ProductLabel\Helper\ProductLabel
                                             <input type="hidden" name="<?= /* @escapeNotVerified */ Action::PARAM_NAME_URL_ENCODED ?>" value="<?= /* @escapeNotVerified */ $postParams['data'][Action::PARAM_NAME_URL_ENCODED] ?>">
                                             <?= $block->getBlockHtml('formkey') ?>
                                             <button type="submit"
-                                                    data-pr-sku='<?= $block->escapeHtml($_product->getSku())?>'
-                                                    data-pr-name='<?= $block->escapeHtml($_product->getName()) ?>'
-                                                    data-pr-price='<?= $block->escapeHtml($_product->getPrice()) ?>'
                                                     title="<?= $block->escapeHtml(__('Add to Cart')) ?>"
                                                     class="newAddToCart action tocart primary">
                                                 <span><?= /* @escapeNotVerified */ __('Add to Cart') ?></span>
@@ -216,6 +214,7 @@ $productLabelHelper = $this->helper('Etatvasoft\ProductLabel\Helper\ProductLabel
                     item_category:  "" +  $(this).attr('data-category') + "",
                     item_list_id: "" +  $(this).attr('data-category').replace(/\s+/g, '_').toLowerCase() + "",
                     item_list_name: "" +  $(this).attr('data-category') + "",
+                    price: '' + $(this).attr('data-pr-price') + '',
             
                 }
             }
@@ -247,18 +246,28 @@ $productLabelHelper = $this->helper('Etatvasoft\ProductLabel\Helper\ProductLabel
              *  Author: Ankush Kumar
             */
             $(this).on("click", function(e) {
-                e.preventDefault();
-                alert(parseInt($(this).attr('data-offer')));
-            
-                if (parseInt($(this).attr('data-offer'))) {
-
-                    gtag("event", "select_promotion", {  ...selectPromotionData, items: listData.items[i] })
                 
-                    
+                if (parseInt($(this).attr('data-offer'))) {
+                    gtag("event", "select_promotion", {  ...selectPromotionData, items: listData.items[i] })
                 } else {
                     gtag("event", "select_item", { ...listData , items: listData.items[i] })
                 };
 
+            })
+
+
+            /**
+             *  Trigger Google Analytics Add to Cart Event for category Pages
+             *  Author: Ankush Kumar
+            */
+            $(this).find('.newAddToCart').on("click", function(e) {
+
+                 gtag("event", "add_to_cart", {
+                    currency: "GBP",
+                    value: '' + listData.items[i]['price'] + '',
+                    items: [{ ...listData.items[i] }]
+                 });
+              
             })
             
     })
@@ -288,7 +297,7 @@ $productLabelHelper = $this->helper('Etatvasoft\ProductLabel\Helper\ProductLabel
             }
 
         }    
-        console.log('debug', dataLayer);
+       
 
     });
 </script>
