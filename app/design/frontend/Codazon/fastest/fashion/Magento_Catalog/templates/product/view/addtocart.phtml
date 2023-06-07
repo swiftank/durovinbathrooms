@@ -100,7 +100,13 @@ if(isset($dataValidate["validate-item-quantity"]["qtyIncrements"])){
     ], function ($) {
         'use strict';
 
-           /**
+           
+            // Getting categories from localstorage - events Related  
+            var categories = JSON.parse(localStorage.getItem("categories"));
+            categories =  categories === null ? [] : categories ;
+            // Unique categories checking - events Related  
+            
+            /**
              * Google Analytics View Item Event for product view page
              *  Author: Ankush
              */
@@ -129,6 +135,17 @@ if(isset($dataValidate["validate-item-quantity"]["qtyIncrements"])){
 
                 widget.catalogAddToCart('submitForm', $(form));
 
+                // Unique categories checking - events Related  
+                var skku = '<?php echo $_product['sku']; ?>';
+                var matched = categories.find(i => i.sku == skku );
+
+                if(matched === undefined){
+                    var newCategories = [...categories, {'sku' : '<?php echo $_product['sku']; ?>' ,'category_name': '<?php echo $category->getName(); ?>'}];
+                    localStorage.setItem("categories", JSON.stringify(newCategories));
+                }
+                 // Unique categories checking - events Related  
+
+
                  /**
                  * Google Analytics Add to Cart Event for single product view page
                  *  Author: Ankush
@@ -145,7 +162,6 @@ if(isset($dataValidate["validate-item-quantity"]["qtyIncrements"])){
                         'price': parseFloat($('.price-final_price .price')[0].innerText.replace('£','')),
                         'quantity': parseFloat($('#qty').val())
                      }]});
-                     console.log('debug', dataLayer);
                 return false;
             }
         });
@@ -157,6 +173,10 @@ if(isset($dataValidate["validate-item-quantity"]["qtyIncrements"])){
     $('.newAddToCartRelated').each(function(index) {
         $(this).on("click", function(e) {
             e.preventDefault();
+            /**
+             * Google Analytics Add to Cart Event for related products in product details view
+             *  Author: Ankush
+             */
             gtag('event', 'add_to_cart', {
                 'currency': "GBP",
                 'value': parseFloat($(this).attr('data-pr-price')) ,
@@ -173,24 +193,22 @@ if(isset($dataValidate["validate-item-quantity"]["qtyIncrements"])){
                     
                 }]
             });
-            $(this).parents('form:first').submit();
-            var categories = JSON.parse(localStorage.getItem("categories"));
-            categories =  categories === null ? [] : categories ;
+
+            // Unique categories checking - events Related  
             var skku = '<?php echo $_product['sku']; ?>';
             var matched = categories.find(i => i.sku == skku );
 
             if(matched === undefined){
-                var newCategories = [...categories, {'category_id': <?php echo $_product['category_id']; ?>, 'sku' : '<?php echo $_product['sku']; ?>' ,'name': '<?php echo $category->getName(); ?>'}];
+                var newCategories = [...categories, {'sku' : '<?php echo $_product['sku']; ?>' ,'category_name': '<?php echo $category->getName(); ?>'}];
                 localStorage.setItem("categories", JSON.stringify(newCategories));
             }
+            // Unique categories checking - events Related
 
-           console.log(categories);
-     
+     		$(this).parents('form:first').submit();
             return false;
         });
     })
     });
 
-    console.log('debug', dataLayer);
 </script>
 <?php endif; ?>
